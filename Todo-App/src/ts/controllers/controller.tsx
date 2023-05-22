@@ -45,7 +45,7 @@ function Controller() {
   };
 
   const handleCheckClick: ControllerInterface["handleCheckClick"] = (
-    event,
+    _event,
     task_id
   ) => {
     taskModel.updateState(task_id);
@@ -54,10 +54,12 @@ function Controller() {
   };
 
   const handleDestroyClick: ControllerInterface["handleDestroyClick"] = (
-    event,
+    _event,
     task_id
   ) => {
-    console.log("Handling destroy click");
+    taskModel.destroyTask(task_id);
+
+    updateTasks();
   };
 
   const handleEditClick: ControllerInterface["handleEditClick"] = (
