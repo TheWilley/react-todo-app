@@ -1,8 +1,12 @@
-function Footer({ items_left }: { items_left: number }) {
+interface FooterInterface {
+  items_left: number;
+}
+
+function Footer(props: FooterInterface) {
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>{items_left}</strong> item left
+        <strong>{props.items_left}</strong> item left
       </span>
       <ul className="filters">
         <li>

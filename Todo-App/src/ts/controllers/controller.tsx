@@ -27,11 +27,12 @@ function Controller() {
     if (event.keyCode != keys.ENTER_KEY) return;
 
     // Get task title
-    const task_title = (event.target as HTMLInputElement).value.trim();
+    let task = event.target as HTMLInputElement;
 
     // If task title is not undefined, add it
-    if (task_title != undefined) {
-      taskModel.addTask({ title: task_title, completed: false });
+    if (task.value != undefined) {
+      taskModel.addTask({ title: task.value.trim(), completed: false });
+      task.value = "";
     }
 
     updateTasks();
@@ -62,16 +63,22 @@ function Controller() {
   return (
     <>
       <Header handleNewKeyPress={handleNewKeyPress} />
-      <Items
-        list={taskState}
-        handleEditClick={(event) => handleEditClick(event)}
-        handleDestroyClick={(event) => handleDestroyClick(event)}
-        handleCheckClick={(event) => handleCheckClick(event)}
-        handleEditKeyPress={(event) => handleEditKeyPress(event)}
-      />
-      <Footer
-        items_left={taskState.filter((item) => item.completed == false).length}
-      />
+      {taskState.length > 0 && (
+        <>
+          <Items
+            list={taskState}
+            handleEditClick={(event) => handleEditClick(event)}
+            handleDestroyClick={(event) => handleDestroyClick(event)}
+            handleCheckClick={(event) => handleCheckClick(event)}
+            handleEditKeyPress={(event) => handleEditKeyPress(event)}
+          />
+          <Footer
+            items_left={
+              taskState.filter((item) => item.completed == false).length
+            }
+          />
+        </>
+      )}
     </>
   );
 }

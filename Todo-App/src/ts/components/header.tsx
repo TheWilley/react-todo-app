@@ -1,10 +1,10 @@
 import { KeyboardEvent } from "react";
 
-function Header({
-  handleNewKeyPress,
-}: {
+interface HeaderInterface {
   handleNewKeyPress: (event: KeyboardEvent) => void;
-}) {
+}
+
+function Header(props: HeaderInterface) {
   return (
     <header className="header">
       <h1>todos</h1>
@@ -12,7 +12,7 @@ function Header({
         className="new-todo"
         placeholder="What needs to be done?"
         autoFocus
-        onKeyDown={(e) => handleNewKeyPress(e)}
+        onKeyDown={(e) => props.handleNewKeyPress(e)}
       />
     </header>
   );
