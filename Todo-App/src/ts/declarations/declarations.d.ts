@@ -7,6 +7,7 @@ declare interface taskModel {
     id: number,
     title: string,
     completed: boolean
+    editing: boolean
 }
 
 declare interface ControllerInterface {

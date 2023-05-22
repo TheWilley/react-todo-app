@@ -30,6 +30,7 @@ function Controller() {
         title: task.value.trim(),
         completed: false,
         id: taskState.length,
+        editing: false,
       });
       task.value = "";
     }
@@ -41,7 +42,20 @@ function Controller() {
     event,
     task_id
   ) => {
-    console.log("Handling edit key");
+    if (event.keyCode == keys.ENTER_KEY) {
+      // Get task title
+      let task = event.target as HTMLInputElement;
+
+      // If task title is not undefined, add it
+      if (task.value != "") {
+        taskModel.updateTitle(task_id, task.value);
+        taskModel.updateEditStatus(task_id);
+      }
+    } else if (event.keyCode == keys.ESC_KEY) {
+      taskModel.updateEditStatus(task_id);
+    }
+
+    updateTasks();
   };
 
   const handleCheckClick: ControllerInterface["handleCheckClick"] = (
@@ -67,8 +81,10 @@ function Controller() {
     task_id
   ) => {
     if (event.detail == 2) {
-      console.log("Editing item");
+      taskModel.updateEditStatus(task_id);
     }
+
+    updateTasks();
   };
 
   const updateTasks = () => {

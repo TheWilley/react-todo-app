@@ -7,7 +7,9 @@ function Items(props: ControllerInterface) {
         {props.list.map((task) => (
           <li
             key={task.id}
-            className={task.completed === true ? "completed" : "active"}
+            className={`${task.completed === true ? "completed" : "active"} ${
+              task.editing === true && "editing"
+            }`}
           >
             <div className="view">
               <input
@@ -26,7 +28,7 @@ function Items(props: ControllerInterface) {
             </div>
             <input
               className="edit"
-              value="Create a TodoMVC template"
+              defaultValue={task.title}
               onKeyDown={(event) => props.handleEditKeyPress(event, task.id)}
             />
           </li>
