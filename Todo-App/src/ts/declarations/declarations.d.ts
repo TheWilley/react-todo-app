@@ -4,6 +4,15 @@ declare interface taskHandlerInterface {
 }
 
 declare interface taskModel {
+    id: number,
     title: string,
     completed: boolean
+}
+
+declare interface ControllerInterface {
+    list: taskModel[];
+    handleCheckClick: (event: React.MouseEvent, task_id: number) => void;
+    handleEditClick: (event: React.MouseEvent, task_id: number) => void;
+    handleDestroyClick: (event: React.MouseEvent, task_id: number) => void;
+    handleEditKeyPress: (event: React.KeyboardEvent, task_id: number) => void;
 }

@@ -1,10 +1,5 @@
 import { keys } from "../helpers/keys";
-import {
-  KeyboardEvent,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  useState,
-} from "react";
+import { KeyboardEventHandler, MouseEventHandler, useState } from "react";
 import Items from "../components/items";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -22,7 +17,7 @@ function Controller() {
    * Triggers when the enter key is clicked inside "new todo" input
    * @param event The keyboard event
    */
-  const handleNewKeyPress = (event: KeyboardEvent) => {
+  const handleNewKeyPress: KeyboardEventHandler = (event) => {
     // keyCode is depricated but used per assigment requirements
     if (event.keyCode != keys.ENTER_KEY) return;
 
@@ -30,27 +25,45 @@ function Controller() {
     let task = event.target as HTMLInputElement;
 
     // If task title is not undefined, add it
-    if (task.value != undefined) {
-      taskModel.addTask({ title: task.value.trim(), completed: false });
+    if (task.value != "") {
+      taskModel.addTask({
+        title: task.value.trim(),
+        completed: false,
+        id: taskState.length,
+      });
       task.value = "";
     }
 
     updateTasks();
   };
 
-  const handleEditKeyPress: KeyboardEventHandler = (event) => {
+  const handleEditKeyPress: ControllerInterface["handleEditKeyPress"] = (
+    event,
+    task_id
+  ) => {
     console.log("Handling edit key");
   };
 
-  const handleCheckClick: MouseEventHandler = (event) => {
-    console.log("Handling click");
+  const handleCheckClick: ControllerInterface["handleCheckClick"] = (
+    event,
+    task_id
+  ) => {
+    taskModel.updateState(task_id);
+
+    updateTasks();
   };
 
-  const handleDestroyClick: MouseEventHandler = (event) => {
+  const handleDestroyClick: ControllerInterface["handleDestroyClick"] = (
+    event,
+    task_id
+  ) => {
     console.log("Handling destroy click");
   };
 
-  const handleEditClick: MouseEventHandler = (event) => {
+  const handleEditClick: ControllerInterface["handleEditClick"] = (
+    event,
+    task_id
+  ) => {
     if (event.detail == 2) {
       console.log("Editing item");
     }
@@ -67,10 +80,10 @@ function Controller() {
         <>
           <Items
             list={taskState}
-            handleEditClick={(event) => handleEditClick(event)}
-            handleDestroyClick={(event) => handleDestroyClick(event)}
-            handleCheckClick={(event) => handleCheckClick(event)}
-            handleEditKeyPress={(event) => handleEditKeyPress(event)}
+            handleEditClick={handleEditClick}
+            handleDestroyClick={handleDestroyClick}
+            handleCheckClick={handleCheckClick}
+            handleEditKeyPress={handleEditKeyPress}
           />
           <Footer
             items_left={

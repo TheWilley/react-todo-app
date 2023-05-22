@@ -1,42 +1,33 @@
-import { KeyboardEventHandler, useState } from "react";
-import { MouseEventHandler } from "react";
-
-interface ItemsInterface {
-  list: taskModel[];
-  handleCheckClick: MouseEventHandler;
-  handleEditClick: MouseEventHandler;
-  handleDestroyClick: MouseEventHandler;
-  handleEditKeyPress: KeyboardEventHandler;
-}
-
-function Items(props: ItemsInterface) {
-  const [completed, updateCompleted] = useState(0);
-  const [title, updateTitle] = useState("");
-
+function Items(props: ControllerInterface) {
   return (
     <section className="main">
       <input id="toggle-all" className="toggle-all" type="checkbox" />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
-        {props.list.map((task, index) => (
-          <li key={index} className={completed === 1 ? "completed" : "active"}>
+        {props.list.map((task) => (
+          <li
+            key={task.id}
+            className={task.completed === true ? "completed" : "active"}
+          >
             <div className="view">
               <input
                 className="toggle"
                 type="checkbox"
-                defaultChecked={completed === 1 ? true : false}
-                onClick={props.handleCheckClick}
+                defaultChecked={task.completed === true ? true : false}
+                onClick={(event) => props.handleCheckClick(event, task.id)}
               />
-              <label onClick={props.handleEditClick}>{task.title}</label>
+              <label onClick={(event) => props.handleEditClick(event, task.id)}>
+                {task.title}
+              </label>
               <button
                 className="destroy"
-                onClick={props.handleDestroyClick}
+                onClick={(event) => props.handleDestroyClick(event, task.id)}
               ></button>
             </div>
             <input
               className="edit"
               value="Create a TodoMVC template"
-              onKeyDown={props.handleEditKeyPress}
+              onKeyDown={(event) => props.handleEditKeyPress(event, task.id)}
             />
           </li>
         ))}
