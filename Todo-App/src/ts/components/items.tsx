@@ -1,4 +1,12 @@
-function Items(props: ControllerInterface) {
+interface ItemsInterface {
+  list: taskModel[];
+  handleCheckClick: ControllerInterface["handleCheckClick"];
+  handleEditClick: ControllerInterface["handleEditClick"];
+  handleDestroyClick: ControllerInterface["handleDestroyClick"];
+  handleEditKeyPress: ControllerInterface["handleEditKeyPress"];
+}
+
+function Items(props: ItemsInterface) {
   return (
     <section className="main">
       <input id="toggle-all" className="toggle-all" type="checkbox" />

@@ -1,5 +1,5 @@
 import { keys } from "../helpers/keys";
-import { KeyboardEventHandler, MouseEventHandler, useState } from "react";
+import { KeyboardEventHandler, useState } from "react";
 import Items from "../components/items";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -29,7 +29,7 @@ function Controller() {
       taskModel.addTask({
         title: task.value.trim(),
         completed: false,
-        id: taskState.length,
+        id: Math.random() * 9999999,
         editing: false,
       });
       task.value = "";
@@ -87,6 +87,13 @@ function Controller() {
     updateTasks();
   };
 
+  const handleClearCompleted: ControllerInterface["handleClearCompleted"] =
+    () => {
+      taskModel.clearCompleted();
+
+      updateTasks();
+    };
+
   const updateTasks = () => {
     setTaskState([...taskModel.getTasks()]);
   };
@@ -107,6 +114,7 @@ function Controller() {
             items_left={
               taskState.filter((item) => item.completed == false).length
             }
+            handleClearCompleted={handleClearCompleted}
           />
         </>
       )}

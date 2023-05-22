@@ -1,5 +1,6 @@
 interface FooterInterface {
   items_left: number;
+  handleClearCompleted: ControllerInterface["handleClearCompleted"];
 }
 
 function Footer(props: FooterInterface) {
@@ -21,7 +22,9 @@ function Footer(props: FooterInterface) {
           <a href="#/completed">Completed</a>
         </li>
       </ul>
-      <button className="clear-completed">Clear completed</button>
+      <button className="clear-completed" onClick={props.handleClearCompleted}>
+        Clear completed
+      </button>
     </footer>
   );
 }

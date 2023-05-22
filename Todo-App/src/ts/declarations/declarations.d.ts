@@ -15,5 +15,6 @@ declare interface ControllerInterface {
     handleCheckClick: (event: React.MouseEvent, task_id: number) => void;
     handleEditClick: (event: React.MouseEvent, task_id: number) => void;
     handleDestroyClick: (event: React.MouseEvent, task_id: number) => void;
+    handleClearCompleted: () => void;
     handleEditKeyPress: (event: React.KeyboardEvent, task_id: number) => void;
 }
