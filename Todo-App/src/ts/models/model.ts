@@ -1,16 +1,16 @@
 class Model {
-  private list: taskModel[] = [];
+  private tasks: taskModel[] = [];
 
   constructor() {
-    this.list = [];
+    this.tasks = [];
   }
 
-  setList(e: taskModel[]) {
-    this.list = e;
+  addTask(e: taskModel) {
+    this.tasks.push(e);
   }
 
-  getList() {
-    return this.list;
+  getTasks() {
+    return this.tasks;
   }
 }
 

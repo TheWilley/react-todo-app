@@ -1,7 +1,7 @@
-function Footer({items_left}: {items_left: number}) {
+function Footer({ items_left }: { items_left: number }) {
   return (
     <footer className="footer">
-      <span className='todo-count'>
+      <span className="todo-count">
         <strong>{items_left}</strong> item left
       </span>
       <ul className="filters">

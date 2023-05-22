@@ -1,4 +1,6 @@
 {
+  "git.autofetch": true,
+  "html.validate.scripts": false,
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
@@ -8,4 +10,12 @@
   "editor.formatOnType": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
+  "[sass]": {
+    "editor.defaultFormatter": "syler.sass-indented"
+  },
+  "github.copilot.advanced": {},
+  "github.copilot.inlineSuggest.enable": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
