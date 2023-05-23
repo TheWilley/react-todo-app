@@ -41,6 +41,11 @@ function Controller() {
     updateComps();
   };
 
+  /**
+   * Handles updates of tasks when pressing 'Enter'
+   * @param event The keyboard event
+   * @param task_id The id of the task
+   */
   const handleEditKeyPress: ControllerInterface['handleEditKeyPress'] = (event, task_id) => {
     if (event.keyCode == keys.ENTER_KEY) {
       // Get task title
@@ -58,18 +63,33 @@ function Controller() {
     updateComps();
   };
 
+  /**
+   * Updates the state of task when checking it as complete or uncomplete
+   * @param _event The keyboard event
+   * @param task_id The id of the task
+   */
   const handleCheckClick: ControllerInterface['handleCheckClick'] = (_event, task_id) => {
     taskModel.updateState(task_id);
 
     updateComps();
   };
 
+  /**
+   * Removes a task when pressing the x button
+   * @param _event The keyboard event
+   * @param task_id The id of the task
+   */
   const handleDestroyClick: ControllerInterface['handleDestroyClick'] = (_event, task_id) => {
     taskModel.destroyTask(task_id);
 
     updateComps();
   };
 
+  /**
+   * Toggles the edit input when double clicking a item
+   * @param _event The keyboard event
+   * @param task_id The id of the task
+   */
   const handleEditClick: ControllerInterface['handleEditClick'] = (event, task_id) => {
     if (event.detail == 2) {
       taskModel.updateEditStatus(task_id);
@@ -78,24 +98,38 @@ function Controller() {
     updateComps();
   };
 
+  /**
+   * Clears all completed items
+   */
   const handleClearCompleted: ControllerInterface['handleClearCompleted'] = () => {
     taskModel.clearCompleted();
 
     updateComps();
   };
 
+  /**
+   * Handles router changes when changing filter
+   * @param _event The keyboard event
+   * @param path The path of the router path
+   */
   const handleRouter: ControllerInterface['handleRouter'] = (_event, path) => {
     taskModel.setActiveView(path);
 
     updateComps();
   };
 
+  /**
+   * Toggles all tasks on or off
+   */
   const handleToggleAll: ControllerInterface['handleToggleAll'] = () => {
     taskModel.toggleAll();
 
     updateComps();
   };
 
+  /**
+   * Updates all components to match Model
+   */
   const updateComps = () => {
     localStorage.setItem('tasks', JSON.stringify([...taskModel.getTasks()]));
 
