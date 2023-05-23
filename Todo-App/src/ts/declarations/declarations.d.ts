@@ -18,9 +18,9 @@ declare interface ControllerInterface {
     handleDestroyClick: (event: React.MouseEvent, task_id: number) => void;
     handleClearCompleted: () => void;
     handleEditKeyPress: (event: React.KeyboardEvent, task_id: number) => void;
-    handleRouter: (event: React.MouseEvent, path: "all" | "active" | "completed" | "") => void
+    handleRouter: (event: React.MouseEvent, path: view_states) => void
     handleNewKeyPress: (event: KeyboardEvent<HTMLInputElement>) => void;
     handleToggleAll: (event: React.MouseEvent) => void
 }
 
-declare type view_states = "all" | "active" | "completed" | ""  
+declare type view_states = 'all' | 'active' | 'completed' | ''  

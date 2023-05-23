@@ -1,5 +1,5 @@
-import Info from "./components/info";
-import Controller from "./controllers/controller";
+import Info from './components/info';
+import Controller from './controllers/controller';
 
 function App() {
   return (

@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 interface FooterInterface {
   view_state: view_states;
   items_left: number;
   all_items_completed: boolean;
-  handleClearCompleted: ControllerInterface["handleClearCompleted"];
-  handleRouter: ControllerInterface["handleRouter"];
+  handleClearCompleted: ControllerInterface['handleClearCompleted'];
+  handleRouter: ControllerInterface['handleRouter'];
 }
 
 function Footer(props: FooterInterface) {
@@ -18,9 +18,9 @@ function Footer(props: FooterInterface) {
         <ul className="filters">
           <li>
             <Link
-              className={props.view_state == "all" ? "selected" : ""}
+              className={props.view_state == 'all' ? 'selected' : ''}
               to="#/"
-              onClick={(event) => props.handleRouter(event, "all")}
+              onClick={(event) => props.handleRouter(event, 'all')}
             >
               All
             </Link>
@@ -28,8 +28,8 @@ function Footer(props: FooterInterface) {
           <li>
             <Link
               to="#/active"
-              onClick={(event) => props.handleRouter(event, "active")}
-              className={props.view_state == "active" ? "selected" : ""}
+              onClick={(event) => props.handleRouter(event, 'active')}
+              className={props.view_state == 'active' ? 'selected' : ''}
             >
               Active
             </Link>
@@ -37,17 +37,15 @@ function Footer(props: FooterInterface) {
           <li>
             <Link
               to="#/completed"
-              onClick={(event) => props.handleRouter(event, "completed")}
-              className={props.view_state == "completed" ? "selected" : ""}
+              onClick={(event) => props.handleRouter(event, 'completed')}
+              className={props.view_state == 'completed' ? 'selected' : ''}
             >
               Completed
             </Link>
           </li>
         </ul>
         <button
-          className={`clear-completed ${
-            props.all_items_completed ? "" : "hidden"
-          }`}
+          className={`clear-completed ${props.all_items_completed ? '' : 'hidden'}`}
           onClick={props.handleClearCompleted}
         >
           Clear completed

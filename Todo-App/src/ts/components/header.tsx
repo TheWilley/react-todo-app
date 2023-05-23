@@ -1,5 +1,5 @@
 interface HeaderInterface {
-  handleNewKeyPress: ControllerInterface["handleNewKeyPress"];
+  handleNewKeyPress: ControllerInterface['handleNewKeyPress'];
 }
 
 function Header(props: HeaderInterface) {
