@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 interface FooterInterface {
   view_state: view_states;
   items_left: number;
+  all_items_completed: boolean;
   handleClearCompleted: ControllerInterface["handleClearCompleted"];
   handleRouter: ControllerInterface["handleRouter"];
 }
@@ -44,7 +45,9 @@ function Footer(props: FooterInterface) {
           </li>
         </ul>
         <button
-          className="clear-completed"
+          className={`clear-completed ${
+            props.all_items_completed ? "" : "hidden"
+          }`}
           onClick={props.handleClearCompleted}
         >
           Clear completed

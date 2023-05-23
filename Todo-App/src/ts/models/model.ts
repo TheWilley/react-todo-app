@@ -98,6 +98,32 @@ class Model {
       }
     }
   }
+
+  toggleAll() {
+    let allCompleted = true
+
+    // Check if all items are completed
+    for (const item of this.tasks) {
+      if (!item.completed) {
+        allCompleted = false
+      }
+    }
+
+    // Make all items uncompleted if all are completed
+    if (allCompleted) {
+      for (const item of this.tasks) {
+        item.completed = false
+      }
+    }
+    // Make those uncompleted completed if all is not completed
+    else {
+      for (const item of this.tasks) {
+        if (!item.completed) {
+          item.completed = true
+        }
+      }
+    }
+  }
 }
 
 export default Model;

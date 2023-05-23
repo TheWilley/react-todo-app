@@ -1,7 +1,5 @@
-import { KeyboardEvent } from "react";
-
 interface HeaderInterface {
-  handleNewKeyPress: (event: KeyboardEvent) => void;
+  handleNewKeyPress: ControllerInterface["handleNewKeyPress"];
 }
 
 function Header(props: HeaderInterface) {

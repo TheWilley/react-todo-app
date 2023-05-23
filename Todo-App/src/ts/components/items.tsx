@@ -4,13 +4,19 @@ interface ItemsInterface {
   handleEditClick: ControllerInterface["handleEditClick"];
   handleDestroyClick: ControllerInterface["handleDestroyClick"];
   handleEditKeyPress: ControllerInterface["handleEditKeyPress"];
+  handleToggleAll: ControllerInterface["handleToggleAll"];
 }
 
 function Items(props: ItemsInterface) {
   return (
     <section className="main">
       <input id="toggle-all" className="toggle-all" type="checkbox" />
-      <label htmlFor="toggle-all">Mark all as complete</label>
+      <label
+        htmlFor="toggle-all"
+        onClick={(event) => props.handleToggleAll(event)}
+      >
+        Mark all as complete
+      </label>
       <ul className="todo-list">
         {props.list.map((task) => (
           <li
@@ -25,6 +31,7 @@ function Items(props: ItemsInterface) {
                 type="checkbox"
                 defaultChecked={task.completed === true ? true : false}
                 onClick={(event) => props.handleCheckClick(event, task.id)}
+                checked={task.completed}
               />
               <label onClick={(event) => props.handleEditClick(event, task.id)}>
                 {task.title}

@@ -1,5 +1,5 @@
 import { keys } from "../helpers/keys";
-import { KeyboardEventHandler, useState } from "react";
+import { useState } from "react";
 import Items from "../components/items";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -19,7 +19,9 @@ function Controller() {
    * Triggers when the enter key is clicked inside "new todo" input
    * @param event The keyboard event
    */
-  const handleNewKeyPress: KeyboardEventHandler = (event) => {
+  const handleNewKeyPress: ControllerInterface["handleNewKeyPress"] = (
+    event
+  ) => {
     // keyCode is depricated but used per assigment requirements
     if (event.keyCode != keys.ENTER_KEY) return;
 
@@ -103,6 +105,12 @@ function Controller() {
     updateComps();
   };
 
+  const handleToggleAll: ControllerInterface["handleToggleAll"] = () => {
+    taskModel.toggleAll();
+
+    updateComps();
+  };
+
   const updateComps = () => {
     localStorage.setItem("tasks", JSON.stringify([...taskModel.getTasks()]));
 
@@ -128,9 +136,13 @@ function Controller() {
             handleDestroyClick={handleDestroyClick}
             handleCheckClick={handleCheckClick}
             handleEditKeyPress={handleEditKeyPress}
+            handleToggleAll={handleToggleAll}
           />
           <Footer
             view_state={viewState}
+            all_items_completed={
+              taskState.filter((item) => item.completed == true).length > 0
+            }
             items_left={
               taskState.filter((item) => item.completed == false).length
             }
