@@ -13,6 +13,7 @@ function Controller() {
   // State to handle the tasks
   const [taskState, setTaskState] = useState<taskModel[]>([]);
   const [viewState, setViewState] = useState<view_states>("");
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   /**
    * Triggers when the enter key is clicked inside "new todo" input
@@ -103,9 +104,18 @@ function Controller() {
   };
 
   const updateComps = () => {
+    localStorage.setItem("tasks", JSON.stringify([...taskModel.getTasks()]));
+
     setTaskState([...taskModel.getTasks()]);
     setViewState(taskModel.getActiveView());
   };
+
+  // When page first loads, update the list to reflect local storage
+  if (!pageLoaded) {
+    updateComps();
+
+    setPageLoaded(true);
+  }
 
   return (
     <>

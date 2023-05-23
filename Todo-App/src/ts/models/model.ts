@@ -6,6 +6,7 @@ class Model {
     this.tasks = [];
 
     this.checkActiveView()
+    this.checkLocalStorage()
   }
 
   setActiveView(view: view_states) {
@@ -53,6 +54,12 @@ class Model {
         }
         window.location.hash
       }
+    }
+  }
+
+  checkLocalStorage() {
+    if (localStorage.getItem("tasks")) {
+      this.tasks = JSON.parse(localStorage.getItem("tasks")!)
     }
   }
 
