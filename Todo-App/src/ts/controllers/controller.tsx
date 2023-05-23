@@ -24,7 +24,7 @@ function Controller() {
     if (event.keyCode != keys.ENTER_KEY) return;
 
     // Get task title
-    let task = event.target as HTMLInputElement;
+    const task = event.target as HTMLInputElement;
 
     // If task title is not undefined, add it
     if (task.value != '') {
@@ -49,7 +49,7 @@ function Controller() {
   const handleEditKeyPress: ControllerInterface['handleEditKeyPress'] = (event, task_id) => {
     if (event.keyCode == keys.ENTER_KEY) {
       // Get task title
-      let task = event.target as HTMLInputElement;
+      const task = event.target as HTMLInputElement;
 
       // If task title is not undefined, add it
       if (task.value != '') {

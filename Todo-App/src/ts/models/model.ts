@@ -1,12 +1,12 @@
 class Model {
   private tasks: taskModel[] = [];
-  private active_view: view_states = ""
+  private active_view: view_states = '';
 
   constructor() {
     this.tasks = [];
 
-    this.checkActiveView()
-    this.checkLocalStorage()
+    this.checkActiveView();
+    this.checkLocalStorage();
   }
 
   /**
@@ -14,9 +14,9 @@ class Model {
    * @param view The target view
    */
   setActiveView(view: view_states) {
-    this.active_view = view
+    this.active_view = view;
 
-    this.checkActiveView()
+    this.checkActiveView();
   }
 
   /**
@@ -24,7 +24,7 @@ class Model {
    * @returns The active view
    */
   getActiveView() {
-    return this.active_view
+    return this.active_view;
   }
 
   /**
@@ -32,35 +32,35 @@ class Model {
    */
   checkActiveView() {
     // Only if it's the first time the user enters (reload page)
-    if (this.active_view == "") {
+    if (this.active_view == '') {
       // Get url
-      const url = window.location.hash
+      const url = window.location.hash;
 
       // Check which one to render
-      if (url.includes("active")) {
-        this.active_view = "active"
-      } else if (url.includes("completed")) {
-        this.active_view = "completed"
+      if (url.includes('active')) {
+        this.active_view = 'active';
+      } else if (url.includes('completed')) {
+        this.active_view = 'completed';
       } else {
-        this.active_view = "all"
+        this.active_view = 'all';
       }
     } else {
       // Filter tasks
-      for (let task of this.tasks) {
-        if (this.active_view == "all") {
-          task.show = true
-        } else if (this.active_view == "active") {
+      for (const task of this.tasks) {
+        if (this.active_view == 'all') {
+          task.show = true;
+        } else if (this.active_view == 'active') {
           if (task.completed == false) {
-            task.show = true
+            task.show = true;
           } else {
-            task.show = false
+            task.show = false;
           }
-        } else if (this.active_view == "completed") {
+        } else if (this.active_view == 'completed') {
           if (task.completed == true) {
-            task.show = true
+            task.show = true;
           } else {
-            console.log(task)
-            task.show = false
+            console.log(task);
+            task.show = false;
           }
         }
       }
@@ -71,8 +71,8 @@ class Model {
    * Checks if there are any items in local storage and assigns them to the task list array if there are
    */
   checkLocalStorage() {
-    if (localStorage.getItem("tasks")) {
-      this.tasks = JSON.parse(localStorage.getItem("tasks")!)
+    if (localStorage.getItem('tasks')) {
+      this.tasks = JSON.parse(localStorage.getItem('tasks')!);
     }
   }
 
@@ -97,8 +97,8 @@ class Model {
    * @param id The id of the task
    */
   updateState(id: number) {
-    let task = this.tasks.filter(item => item.id === id)[0]
-    task.completed = task.completed == true ? false : true
+    const task = this.tasks.filter(item => item.id === id)[0];
+    task.completed = task.completed == true ? false : true;
   }
 
   /**
@@ -106,8 +106,8 @@ class Model {
    * @param id The id of the task
    */
   updateEditStatus(id: number) {
-    let task = this.tasks.filter(item => item.id === id)[0]
-    task.editing = task.editing == true ? false : true
+    const task = this.tasks.filter(item => item.id === id)[0];
+    task.editing = task.editing == true ? false : true;
   }
 
   /**
@@ -116,8 +116,8 @@ class Model {
    * @param value The new title
    */
   updateTitle(id: number, value: string) {
-    let task = this.tasks.filter(item => item.id === id)[0]
-    task.title = value
+    const task = this.tasks.filter(item => item.id === id)[0];
+    task.title = value;
   }
 
   /**
@@ -125,7 +125,7 @@ class Model {
    * @param id The id of the task
    */
   destroyTask(id: number) {
-    this.tasks.splice(this.tasks.findIndex(task => task.id === id), 1)
+    this.tasks.splice(this.tasks.findIndex(task => task.id === id), 1);
   }
 
   /**
@@ -144,26 +144,26 @@ class Model {
    * Toggles all tasks as completed or uncompleted
    */
   toggleAll() {
-    let allCompleted = true
+    let allCompleted = true;
 
     // Check if all items are completed
     for (const item of this.tasks) {
       if (!item.completed) {
-        allCompleted = false
+        allCompleted = false;
       }
     }
 
     // Make all items uncompleted if all are completed
     if (allCompleted) {
       for (const item of this.tasks) {
-        item.completed = false
+        item.completed = false;
       }
     }
     // Make those uncompleted completed if all is not completed
     else {
       for (const item of this.tasks) {
         if (!item.completed) {
-          item.completed = true
+          item.completed = true;
         }
       }
     }

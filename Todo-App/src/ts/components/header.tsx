@@ -7,6 +7,7 @@ function Header(props: HeaderInterface) {
     <header className="header">
       <h1>todos</h1>
       <input
+        data-testid="task-input"
         className="new-todo"
         placeholder="What needs to be done?"
         autoFocus

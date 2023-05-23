@@ -23,7 +23,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    "jest.config.ts",
+    "jest.config.ts"
   ],
   "references": [
     {
