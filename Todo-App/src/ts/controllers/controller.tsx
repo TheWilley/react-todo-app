@@ -70,6 +70,7 @@ function Controller() {
    */
   const handleCheckClick: ControllerInterface['handleCheckClick'] = (_event, task_id) => {
     taskModel.updateState(task_id);
+    taskModel.checkActiveView();
 
     updateComps();
   };

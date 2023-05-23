@@ -63,7 +63,6 @@ class Model {
             task.show = false
           }
         }
-        window.location.hash
       }
     }
   }
