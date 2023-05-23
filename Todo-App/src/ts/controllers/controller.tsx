@@ -12,6 +12,7 @@ const taskModel = new TaskModel();
 function Controller() {
   // State to handle the tasks
   const [taskState, setTaskState] = useState<taskModel[]>([]);
+  const [viewState, setViewState] = useState<view_states>("");
 
   /**
    * Triggers when the enter key is clicked inside "new todo" input
@@ -31,11 +32,12 @@ function Controller() {
         completed: false,
         id: Math.random() * 9999999,
         editing: false,
+        show: true,
       });
       task.value = "";
     }
 
-    updateTasks();
+    updateComps();
   };
 
   const handleEditKeyPress: ControllerInterface["handleEditKeyPress"] = (
@@ -55,7 +57,7 @@ function Controller() {
       taskModel.updateEditStatus(task_id);
     }
 
-    updateTasks();
+    updateComps();
   };
 
   const handleCheckClick: ControllerInterface["handleCheckClick"] = (
@@ -64,7 +66,7 @@ function Controller() {
   ) => {
     taskModel.updateState(task_id);
 
-    updateTasks();
+    updateComps();
   };
 
   const handleDestroyClick: ControllerInterface["handleDestroyClick"] = (
@@ -73,7 +75,7 @@ function Controller() {
   ) => {
     taskModel.destroyTask(task_id);
 
-    updateTasks();
+    updateComps();
   };
 
   const handleEditClick: ControllerInterface["handleEditClick"] = (
@@ -84,18 +86,25 @@ function Controller() {
       taskModel.updateEditStatus(task_id);
     }
 
-    updateTasks();
+    updateComps();
   };
 
   const handleClearCompleted: ControllerInterface["handleClearCompleted"] =
     () => {
       taskModel.clearCompleted();
 
-      updateTasks();
+      updateComps();
     };
 
-  const updateTasks = () => {
+  const handleRouter: ControllerInterface["handleRouter"] = (_event, path) => {
+    taskModel.setActiveView(path);
+
+    updateComps();
+  };
+
+  const updateComps = () => {
     setTaskState([...taskModel.getTasks()]);
+    setViewState(taskModel.getActiveView());
   };
 
   return (
@@ -111,10 +120,12 @@ function Controller() {
             handleEditKeyPress={handleEditKeyPress}
           />
           <Footer
+            view_state={viewState}
             items_left={
               taskState.filter((item) => item.completed == false).length
             }
             handleClearCompleted={handleClearCompleted}
+            handleRouter={handleRouter}
           />
         </>
       )}

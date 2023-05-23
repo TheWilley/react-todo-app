@@ -17,7 +17,7 @@ function Items(props: ItemsInterface) {
             key={task.id}
             className={`${task.completed === true ? "completed" : "active"} ${
               task.editing === true && "editing"
-            }`}
+            } ${task.show === false && "hidden"}`}
           >
             <div className="view">
               <input

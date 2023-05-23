@@ -1,11 +1,11 @@
-import Info from './components/info';
-import Controller from './controllers/controller';
+import Info from "./components/info";
+import Controller from "./controllers/controller";
 
 function App() {
   return (
     <>
       <section className="todoapp">
-        <Controller/>
+        <Controller />
       </section>
       <Info
         author="TheWillley (William Larsson)"

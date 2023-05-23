@@ -8,6 +8,7 @@ declare interface taskModel {
     title: string,
     completed: boolean
     editing: boolean
+    show: boolean
 }
 
 declare interface ControllerInterface {
@@ -17,4 +18,7 @@ declare interface ControllerInterface {
     handleDestroyClick: (event: React.MouseEvent, task_id: number) => void;
     handleClearCompleted: () => void;
     handleEditKeyPress: (event: React.KeyboardEvent, task_id: number) => void;
+    handleRouter: (event: React.MouseEvent, path: "all" | "active" | "completed" | "") => void
 }
+
+declare type view_states = "all" | "active" | "completed" | ""  
